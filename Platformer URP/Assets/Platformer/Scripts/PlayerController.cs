@@ -4,6 +4,7 @@ using UnityEngine;
 using Cinemachine;
 using KBCore.Refs;
 using Utilties;
+using System;
 
 //you can reference other scripts if you change the namespace!!
 
@@ -22,6 +23,7 @@ namespace Platformer
         [SerializeField, Anywhere] InputReader input;
         [SerializeField, Self] Rigidbody rb;
         [SerializeField, Self] GroundChecker groundChecker;
+   
 
 
         [Header("Settings")]
@@ -43,6 +45,14 @@ namespace Platformer
         float velocity;
         
         float jumpVelocity;
+
+        public float playerHealth;
+        public float maxHealth;
+        public AudioClip pained;
+        public AudioSource audioSource;
+        public AudioClip jump;
+        public AudioSource audioSource2;
+
 
 
         Vector3 movement;
@@ -90,6 +100,7 @@ namespace Platformer
             if (performed && !jumpTimer.IsRunning && !jumpCooldownTimer.IsRunning && groundChecker.IsGrounded)
             {
                 jumpTimer.Start();
+                audioSource2.PlayOneShot(jump, 1.0F);
 
             } 
             else if (!performed && jumpTimer.IsRunning)
@@ -179,11 +190,30 @@ namespace Platformer
                     jumpVelocity += (1 - jumpTimer.Progress) * jumpForce * Time.fixedDeltaTime;
                 }
 
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    walkSpeed += 100;
+                }
+
                 rb.velocity = new Vector3(rb.velocity.x, jumpVelocity, rb.velocity.z);
         
 
             }
         }
+        public void TakeDamage(float amount)
+        {
+            playerHealth -= amount;
+            OnPlayerDamaged?.Invoke();
+            animator.Play("Damaged");
+            audioSource.PlayOneShot(pained, 1.0F);
+            
+            
+        }
+
+        public static event Action OnPlayerDamaged;
+
+
+
     }
 }
 
