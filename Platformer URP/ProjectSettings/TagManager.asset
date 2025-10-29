@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - MovingPlatform
+  - Lava
+  - QuickSand
   layers:
   - Default
   - TransparentFX

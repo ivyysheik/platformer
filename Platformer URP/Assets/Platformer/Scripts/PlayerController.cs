@@ -44,7 +44,7 @@ namespace Platformer
         float currentSpeed;
         float velocity;
         
-        float jumpVelocity;
+        public float jumpVelocity;
 
         public float playerHealth;
         public float maxHealth;
@@ -95,7 +95,7 @@ namespace Platformer
             input.Jump -= OnJump;
         }
 
-        void OnJump(bool performed)
+        public void OnJump(bool performed)
         {
             if (performed && !jumpTimer.IsRunning && !jumpCooldownTimer.IsRunning && groundChecker.IsGrounded)
             {
@@ -169,8 +169,9 @@ namespace Platformer
             animator.SetFloat(Speed, currentSpeed);
         }
 
-         void HandleJump()
+         public void HandleJump()
         {
+           
             if (!jumpTimer.IsRunning && groundChecker.IsGrounded)
             {
                 jumpVelocity = 0f;
@@ -212,9 +213,27 @@ namespace Platformer
 
         public static event Action OnPlayerDamaged;
 
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.CompareTag("Lava"))
+            {
+                jumpTimer.Stop();
+                jumpTimer.Start();
+                TakeDamage(1);
 
 
+            }
+
+            if (collision.gameObject.CompareTag("QuickSand"))
+            {
+                TakeDamage(5);
+            }
+        }
     }
+
+
+
 }
+
 
 
