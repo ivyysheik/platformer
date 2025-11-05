@@ -34,7 +34,7 @@ namespace Platformer
 
         void Move()
         {
-            transform.DOMove(moveTo + startPosition, moveTime);
+            transform.DOMove(moveTo + startPosition, moveTime).SetEase(ease);
         }
 
 

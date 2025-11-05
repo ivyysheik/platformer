@@ -36,7 +36,7 @@ namespace Platformer
         [SerializeField] float jumpCooldown = 0f;
         [SerializeField] float jumpDuration = 0.5f;
         [SerializeField] float jumpMaxHeight = 2f;
-
+        [SerializeField] float Invuln = 2f; 
         [SerializeField] float gravityMultiplier = 2.5f;
 
 
@@ -61,6 +61,7 @@ namespace Platformer
 
         CountdownTimer jumpTimer;
         CountdownTimer jumpCooldownTimer;
+        CountdownTimer invulnerabilityTimer;
 
 
         static readonly int Speed = Animator.StringToHash("Speed");
@@ -76,7 +77,8 @@ namespace Platformer
             //start timers
             jumpTimer = new CountdownTimer(jumpDuration);
             jumpCooldownTimer = new CountdownTimer(jumpCooldown);
-            timers = new List<Timer>(capacity: 2) { jumpTimer, jumpCooldownTimer };
+            invulnerabilityTimer = new CountdownTimer(Invuln);
+            timers = new List<Timer>(capacity: 3) { jumpTimer, jumpCooldownTimer, invulnerabilityTimer};
             
             jumpTimer.OnTimerStop += () => jumpCooldownTimer.Start();
         }
@@ -203,10 +205,15 @@ namespace Platformer
         }
         public void TakeDamage(float amount)
         {
-            playerHealth -= amount;
-            OnPlayerDamaged?.Invoke();
-            animator.Play("Damaged");
-            audioSource.PlayOneShot(pained, 1.0F);
+            if (!invulnerabilityTimer.IsRunning)
+            {
+                playerHealth -= amount;
+                OnPlayerDamaged?.Invoke();
+                animator.Play("Damaged");
+                audioSource.PlayOneShot(pained, 1.0F);
+                invulnerabilityTimer.Start();
+            }
+         
             
             
         }
@@ -226,7 +233,7 @@ namespace Platformer
 
             if (collision.gameObject.CompareTag("QuickSand"))
             {
-                TakeDamage(5);
+                TakeDamage(1);
             }
         }
     }
