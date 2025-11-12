@@ -5,6 +5,7 @@ using Cinemachine;
 using KBCore.Refs;
 using Utilties;
 using System;
+using TMPro;
 
 //you can reference other scripts if you change the namespace!!
 
@@ -52,6 +53,9 @@ namespace Platformer
         public AudioSource audioSource;
         public AudioClip jump;
         public AudioSource audioSource2;
+        public float stars;
+        public GameObject Star1; 
+        public 
 
 
 
@@ -96,7 +100,10 @@ namespace Platformer
         {
             input.Jump -= OnJump;
         }
+        public void DrawStars()
+        {
 
+        }
         public void OnJump(bool performed)
         {
             if (performed && !jumpTimer.IsRunning && !jumpCooldownTimer.IsRunning && groundChecker.IsGrounded)
@@ -202,6 +209,8 @@ namespace Platformer
         
 
             }
+
+           
         }
         public void TakeDamage(float amount)
         {
@@ -220,7 +229,7 @@ namespace Platformer
 
         public static event Action OnPlayerDamaged;
 
-        private void OnCollisionEnter(Collision collision)
+        public void OnCollisionEnter(Collision collision)
         {
             if (collision.gameObject.CompareTag("Lava"))
             {
@@ -235,8 +244,19 @@ namespace Platformer
             {
                 TakeDamage(1);
             }
+
+            if (collision.gameObject.CompareTag("Star"))
+            {
+                Destroy(collision.gameObject);
+
+                stars += 1;
+                DrawStars();
+            }
+
         }
     }
+
+    
 
 
 

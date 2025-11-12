@@ -7,6 +7,7 @@ TagManager:
   - MovingPlatform
   - Lava
   - QuickSand
+  - Star
   layers:
   - Default
   - TransparentFX

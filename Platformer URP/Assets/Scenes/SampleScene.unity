@@ -1142,8 +1142,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveTo: {x: 0, y: -3, z: 0}
-  moveTime: 2
-  ease: 16
+  moveTime: 1
+  ease: 0
 --- !u!1 &79418029
 GameObject:
   m_ObjectHideFlags: 0
@@ -3902,7 +3902,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -284420.34, y: 82719.77, z: -1555940}
+  m_LocalPosition: {x: -285691.1, y: 83089.39, z: -1562880.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4543,8 +4543,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveTo: {x: 0, y: -3, z: 0}
-  moveTime: 2
-  ease: 16
+  moveTime: 1
+  ease: 0
 --- !u!43 &420949795
 Mesh:
   m_ObjectHideFlags: 0
@@ -7156,8 +7156,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveTo: {x: 0, y: -3, z: 0}
-  moveTime: 2
-  ease: 16
+  moveTime: 1
+  ease: 0
 --- !u!1001 &708775258
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14859,6 +14859,7 @@ GameObject:
   - component: {fileID: 1386404986}
   - component: {fileID: 1386404987}
   - component: {fileID: 1386404988}
+  - component: {fileID: 1386404989}
   m_Layer: 0
   m_Name: CameraSystem
   m_TagString: Untagged
@@ -14896,8 +14897,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   input: {fileID: 11400000, guid: 3ddccd1471095a3458615f79fc85570f, type: 2}
   freeLookVCam: {fileID: 2002007089}
-  speedMultiplier: 1
---- !u!81 &1386404988
+  speedMultiplier: 1.626
+--- !u!114 &1386404988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1386404985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nonRigidbodyVelocity: 0
+  attenuationObject: {fileID: 0}
+--- !u!81 &1386404989
 AudioListener:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -17738,8 +17753,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveTo: {x: 0, y: -3, z: 0}
-  moveTime: 2
-  ease: 16
+  moveTime: 1
+  ease: 0
 --- !u!1001 &1767208254
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18158,8 +18173,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveTo: {x: 0, y: -3, z: 0}
-  moveTime: 2
-  ease: 16
+  moveTime: 1
+  ease: 0
 --- !u!1 &1795916166
 GameObject:
   m_ObjectHideFlags: 0
@@ -18294,8 +18309,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveTo: {x: 0, y: -3, z: 0}
-  moveTime: 2
-  ease: 16
+  moveTime: 1
+  ease: 0
 --- !u!1 &1816616327
 GameObject:
   m_ObjectHideFlags: 0
@@ -18756,8 +18771,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveTo: {x: 0, y: -3, z: 0}
-  moveTime: 2
-  ease: 16
+  moveTime: 1
+  ease: 0
 --- !u!1 &1867893726
 GameObject:
   m_ObjectHideFlags: 0
