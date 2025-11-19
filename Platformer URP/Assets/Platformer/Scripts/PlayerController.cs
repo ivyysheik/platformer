@@ -39,6 +39,7 @@ namespace Platformer
         [SerializeField] float jumpMaxHeight = 2f;
         [SerializeField] float Invuln = 2f; 
         [SerializeField] float gravityMultiplier = 2.5f;
+        [SerializeField] private TextMeshProUGUI starCount;
 
 
         Transform mainCameraTransform;
@@ -55,7 +56,9 @@ namespace Platformer
         public AudioSource audioSource2;
         public float stars;
         public GameObject Star1; 
-        public 
+        public AudioSource audioSource3;
+        public AudioClip starCollected;
+       
 
 
 
@@ -251,6 +254,13 @@ namespace Platformer
 
                 stars += 1;
                 DrawStars();
+                audioSource3.PlayOneShot(starCollected, 1.0F);
+                starCount.text = stars.ToString();
+            }
+
+            if (collision.gameObject.CompareTag("enemy heads"))
+            {
+                Destroy(collision.transform.parent.parent.gameObject);
             }
 
         }

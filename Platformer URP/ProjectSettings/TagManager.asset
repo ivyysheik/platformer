@@ -8,6 +8,7 @@ TagManager:
   - Lava
   - QuickSand
   - Star
+  - enemy heads
   layers:
   - Default
   - TransparentFX
