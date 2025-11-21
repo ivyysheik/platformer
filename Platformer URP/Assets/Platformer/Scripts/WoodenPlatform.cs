@@ -11,6 +11,7 @@ namespace Platformer
         [SerializeField] Vector3 moveTo = Vector3.zero;
         [SerializeField] float moveTime = 1f;
         [SerializeField] Ease ease = Ease.InOutQuad;
+        public float delay = 0.1f;
 
         Vector3 startPosition;
 
@@ -26,7 +27,8 @@ namespace Platformer
             if (collision.gameObject.CompareTag("Player"))
             {
 
-                Move();
+               
+                StartCoroutine(FallAfterDelay());
 
             }
         }
@@ -35,6 +37,12 @@ namespace Platformer
         void Move()
         {
             transform.DOMove(moveTo + startPosition, moveTime).SetEase(ease);
+        }
+
+        IEnumerator FallAfterDelay()
+        {
+            yield return new WaitForSeconds(delay);
+            Move();
         }
 
 
