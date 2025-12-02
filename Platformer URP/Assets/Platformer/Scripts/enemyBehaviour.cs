@@ -15,7 +15,7 @@ namespace Platformer
         // Start is called before the first frame update
         void Start()
         {
-        
+          enemy.speed = 0f;
         }
         
          private void OnTriggerEnter(Collider other)

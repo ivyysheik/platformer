@@ -23,6 +23,7 @@ namespace Platformer
           {
               // Detach the player from the platform when they exit the trigger
               other.transform.SetParent(null);
+              
           }
       }
     }

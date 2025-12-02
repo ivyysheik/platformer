@@ -6,6 +6,8 @@ namespace Platformer
 {
     public class OnCollisionDamage : MonoBehaviour
     {
+
+    
         // Start is called before the first frame update
       private void OnCollisionEnter(Collision collision)
       {

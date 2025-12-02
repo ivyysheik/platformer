@@ -6,6 +6,7 @@ using KBCore.Refs;
 using Utilties;
 using System;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 //you can reference other scripts if you change the namespace!!
 
@@ -58,6 +59,9 @@ namespace Platformer
         public GameObject Star1; 
         public AudioSource audioSource3;
         public AudioClip starCollected;
+        public GameObject youNeedStarsText;
+
+        private bool StarsActive = false;
        
 
 
@@ -263,14 +267,51 @@ namespace Platformer
                 Destroy(collision.transform.parent.parent.gameObject);
             }
 
+             if (collision.gameObject.CompareTag("Mini boss heads"))
+            {
+                jumpTimer.Stop();
+                jumpTimer.Start();
+                
+
+
+            }
+
+            if (collision.gameObject.CompareTag("Door"))
+            {
+                if (stars >= 4)
+                {
+                    SceneManager.LoadScene("Area 2");
+                } 
+
+                else
+                {
+                    youNeedStarsText.SetActive(true);
+                    StarsActive = true;
+                    
+                }
+            }
+
         }
+        public void OnCollisionExit(Collision collision)
+        {
+            if (collision.gameObject.CompareTag("Door"))
+            {
+                if (StarsActive == true)
+                {
+                    youNeedStarsText.SetActive(false);
+                    StarsActive = false;
+                }
+            }
+        }
+       
     }
+}
 
     
 
 
 
-}
+
 
 
 

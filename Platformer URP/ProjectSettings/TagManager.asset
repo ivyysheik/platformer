@@ -9,6 +9,9 @@ TagManager:
   - QuickSand
   - Star
   - enemy heads
+  - Mini boss heads
+  - Door
+  - Button
   layers:
   - Default
   - TransparentFX
