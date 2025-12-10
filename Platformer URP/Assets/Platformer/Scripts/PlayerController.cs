@@ -70,6 +70,10 @@ namespace Platformer
         public float jumpBufferCounter;
 
         private bool StarsActive = false;
+
+        public Transform playerSpawnPosition;
+        public GameObject checkpoint;
+        public GameObject Player;
        
 
 
@@ -275,6 +279,10 @@ namespace Platformer
                 animator.Play("Damaged");
                 audioSource.PlayOneShot(pained, 1.0F);
                 invulnerabilityTimer.Start();
+                if (playerHealth <=0)
+                {
+                    SceneManager.LoadScene("MainScene");
+                }
             }
          
             
@@ -345,6 +353,10 @@ namespace Platformer
                 Debug.Log("triggered");
             }
 
+            if (other.gameObject.CompareTag("CheckPoint"))
+            {
+                playerSpawnPosition = checkpoint.transform;
+            }
         }
     
     
