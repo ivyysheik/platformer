@@ -41,6 +41,7 @@ namespace Platformer
         [SerializeField] float Invuln = 2f; 
         [SerializeField] float gravityMultiplier = 2.5f;
         [SerializeField] private TextMeshProUGUI starCount;
+        [SerializeField] float coyoteTime = 500f;
 
 
         Transform mainCameraTransform;
@@ -60,6 +61,13 @@ namespace Platformer
         public AudioSource audioSource3;
         public AudioClip starCollected;
         public GameObject youNeedStarsText;
+        public bool canFlipPlatforms = false;
+        public bool redJustFlipped = false;
+        public bool blueJustFlipped = true; 
+        public GameObject bluePlatforms;
+        public GameObject redPlatforms;
+        public float jumpBufferTime = 0.2f;
+        public float jumpBufferCounter;
 
         private bool StarsActive = false;
        
@@ -73,6 +81,7 @@ namespace Platformer
         CountdownTimer jumpTimer;
         CountdownTimer jumpCooldownTimer;
         CountdownTimer invulnerabilityTimer;
+        CountdownTimer coyoteTimer;
 
 
         static readonly int Speed = Animator.StringToHash("Speed");
@@ -88,8 +97,9 @@ namespace Platformer
             //start timers
             jumpTimer = new CountdownTimer(jumpDuration);
             jumpCooldownTimer = new CountdownTimer(jumpCooldown);
+            coyoteTimer = new CountdownTimer(coyoteTime);
             invulnerabilityTimer = new CountdownTimer(Invuln);
-            timers = new List<Timer>(capacity: 3) { jumpTimer, jumpCooldownTimer, invulnerabilityTimer};
+            timers = new List<Timer>(capacity: 4) { jumpTimer, jumpCooldownTimer, invulnerabilityTimer,coyoteTimer};
             
             jumpTimer.OnTimerStop += () => jumpCooldownTimer.Start();
         }
@@ -113,12 +123,45 @@ namespace Platformer
         }
         public void OnJump(bool performed)
         {
-            if (performed && !jumpTimer.IsRunning && !jumpCooldownTimer.IsRunning && groundChecker.IsGrounded)
+            if (performed && !jumpTimer.IsRunning && !jumpCooldownTimer.IsRunning && (groundChecker.IsGrounded || !coyoteTimer.IsFinished))
             {
                 jumpTimer.Start();
-                audioSource2.PlayOneShot(jump, 1.0F);
+                audioSource2.PlayOneShot(jump, 1.0F);   
+
+                if(!groundChecker.IsGrounded && !coyoteTimer.IsFinished)
+                {
+                  Debug.Log("working");
+                }
+
+                if (canFlipPlatforms && redJustFlipped)
+                {
+                    
+                 bluePlatforms.SetActive(true);
+                 redPlatforms.SetActive(false);
+                 redJustFlipped = false;
+                 blueJustFlipped = true;
+
+                 Debug.Log("I Should Have Flipped");
+                }
+
+                else if (canFlipPlatforms && blueJustFlipped)
+                {
+                    bluePlatforms.SetActive(false);
+                    redPlatforms.SetActive(true);
+                    blueJustFlipped = false;
+                    redJustFlipped = true;
+
+               Debug.Log("I Should Have Flipped");
+                }
 
             } 
+
+          
+
+          
+
+            
+
             else if (!performed && jumpTimer.IsRunning)
             {
                 jumpTimer.Stop();
@@ -134,6 +177,10 @@ namespace Platformer
             UpdateAnimator();
             HandleTimers();
             Debug.Log(jumpCooldownTimer.Progress);
+            if(groundChecker.IsGrounded)
+            {
+                coyoteTimer.Start();
+            }
         }
 
         void FixedUpdate()
@@ -271,9 +318,6 @@ namespace Platformer
             {
                 jumpTimer.Stop();
                 jumpTimer.Start();
-                
-
-
             }
 
             if (collision.gameObject.CompareTag("Door"))
@@ -287,11 +331,23 @@ namespace Platformer
                 {
                     youNeedStarsText.SetActive(true);
                     StarsActive = true;
-                    
                 }
             }
 
+           
         }
+
+        public void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.CompareTag("FlippyPlatforms"))
+            {
+                 canFlipPlatforms = true;
+                Debug.Log("triggered");
+            }
+
+        }
+    
+    
         public void OnCollisionExit(Collision collision)
         {
             if (collision.gameObject.CompareTag("Door"))
@@ -306,12 +362,6 @@ namespace Platformer
        
     }
 }
-
     
-
-
-
-
-
 
 

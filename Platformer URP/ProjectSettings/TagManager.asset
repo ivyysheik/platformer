@@ -12,6 +12,7 @@ TagManager:
   - Mini boss heads
   - Door
   - Button
+  - FlippyPlatforms
   layers:
   - Default
   - TransparentFX
