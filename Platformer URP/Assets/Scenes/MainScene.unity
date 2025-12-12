@@ -5635,7 +5635,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -461080.6, y: 134129.19, z: -2520776.8}
+  m_LocalPosition: {x: -461850.84, y: 134355.08, z: -2524983.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9074,7 +9074,7 @@ MonoBehaviour:
   Invuln: 1
   gravityMultiplier: 2.5
   starCount: {fileID: 478700347}
-  coyoteTime: 500
+  coyoteTime: 0.5
   jumpVelocity: 0
   playerHealth: 6
   maxHealth: 6
@@ -9094,6 +9094,9 @@ MonoBehaviour:
   redPlatforms: {fileID: 0}
   jumpBufferTime: 0.2
   jumpBufferCounter: 0
+  playerSpawnPosition: {fileID: 0}
+  checkpoint: {fileID: 0}
+  Player: {fileID: 0}
 --- !u!95 &504175525 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7413344840680693326, guid: cc91c8ba8b9a34f4d99e70d721f60b64,
@@ -34075,6 +34078,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: moving platform (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 3344532836315465879, guid: 6e021d16bbdd4ef498c7e9fbf341592a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3751868637581386177, guid: 6e021d16bbdd4ef498c7e9fbf341592a,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -34204,6 +34212,11 @@ PrefabInstance:
         type: 3}
       propertyPath: moveTo.z
       value: 8.61
+      objectReference: {fileID: 0}
+    - target: {fileID: 8714779273243884233, guid: 6e021d16bbdd4ef498c7e9fbf341592a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9104219153224908807, guid: 6e021d16bbdd4ef498c7e9fbf341592a,
         type: 3}

@@ -51,7 +51,7 @@ namespace Platformer {
             StartCoroutine(DisableMouseForFrame());
         }
 
-        void OnDisableMouseControlCamera() {
+      /*  void OnDisableMouseControlCamera() {
             isRMBPressed = false;
             
             // Unlock the cursor and make it visible
@@ -62,6 +62,7 @@ namespace Platformer {
             freeLookVCam.m_XAxis.m_InputAxisValue = 0f;
             freeLookVCam.m_YAxis.m_InputAxisValue = 0f;
         }
+        */
 
         IEnumerator DisableMouseForFrame() {
             cameraMovementLock = true;

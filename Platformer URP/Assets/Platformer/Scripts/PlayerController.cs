@@ -41,7 +41,7 @@ namespace Platformer
         [SerializeField] float Invuln = 2f; 
         [SerializeField] float gravityMultiplier = 2.5f;
         [SerializeField] private TextMeshProUGUI starCount;
-        [SerializeField] float coyoteTime = 500f;
+        [SerializeField] float coyoteTime = 0.5f;
 
 
         Transform mainCameraTransform;
@@ -106,10 +106,13 @@ namespace Platformer
             timers = new List<Timer>(capacity: 4) { jumpTimer, jumpCooldownTimer, invulnerabilityTimer,coyoteTimer};
             
             jumpTimer.OnTimerStop += () => jumpCooldownTimer.Start();
+            
         }
         void Start()
         {
             input.EnablePlayerActions();
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
 
         void OnEnable()
@@ -129,8 +132,11 @@ namespace Platformer
         {
             if (performed && !jumpTimer.IsRunning && !jumpCooldownTimer.IsRunning && (groundChecker.IsGrounded || !coyoteTimer.IsFinished))
             {
+                coyoteTimer.Stop();
                 jumpTimer.Start();
                 audioSource2.PlayOneShot(jump, 1.0F);   
+
+                
 
                 if(!groundChecker.IsGrounded && !coyoteTimer.IsFinished)
                 {
@@ -258,10 +264,10 @@ namespace Platformer
                     jumpVelocity += (1 - jumpTimer.Progress) * jumpForce * Time.fixedDeltaTime;
                 }
 
-                if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    walkSpeed += 100;
-                }
+                //if (Input.GetKeyDown(KeyCode.Space))
+                //{
+                  //  walkSpeed += 100;
+               // }
 
                 rb.velocity = new Vector3(rb.velocity.x, jumpVelocity, rb.velocity.z);
         
