@@ -18,14 +18,12 @@ namespace Platformer {
 
         void OnEnable() {
             input.Look += OnLook;
-            input.EnableMouseControlCamera += OnEnableMouseControlCamera;
-            input.DisableMouseControlCamera += OnDisableMouseControlCamera;
+           
         }
         
         void OnDisable() {
             input.Look -= OnLook;
-            input.EnableMouseControlCamera -= OnEnableMouseControlCamera;
-            input.DisableMouseControlCamera -= OnDisableMouseControlCamera;
+        
         }
 
         void OnLook(Vector2 cameraMovement, bool isDeviceMouse) {
